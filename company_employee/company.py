@@ -33,7 +33,6 @@ def main():
     enterprise_llc.add_employee(employee2)
     employee3 = CommissionEmployee("Smith", "Doe", 40000, 20, 200)
     enterprise_llc.add_employee(employee3)
-
     enterprise_llc.display_employee()
     enterprise_llc.pay_employee()
 
