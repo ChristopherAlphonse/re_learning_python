@@ -13,7 +13,7 @@ user_input = input("What movie would you like to see?\n")
 
 showtime = current_movies.get(user_input)
 
-if showtime == None:
+if showtime is None:
     print("Please enter a movie from the list", key)
 else:
     print(f"The showtime for {user_input} is {showtime}")
