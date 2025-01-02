@@ -2,6 +2,7 @@ from robot_class import Robot
 
 
 class RobotDog(Robot):
+
     def robot_bark(self):
         print("Wooof")
 
