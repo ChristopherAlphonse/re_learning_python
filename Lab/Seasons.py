@@ -15,7 +15,7 @@
 # 65
 # the output is:
 
-# Invalid 
+# Invalid
 # The dates for each season in the northern hemisphere are:
 # Spring: March 20 - June 20
 # Summer: June 21 - September 21
@@ -32,7 +32,7 @@ months = [
     "July", "August", "September", "October", "November", "December"
 ]
 
-if input_month not in months or input_day < 1 or input_day > 31: 
+if input_month not in months or input_day < 1 or input_day > 31:
     print("Invalid")
 else:
     # Winter: December 21 - March 19

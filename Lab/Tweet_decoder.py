@@ -34,10 +34,9 @@ abbreviations = {
 }
 
 search = input('Enter word to be decoded: ').upper()
-if len(search) < 1 or len(search)>= 160:
+if len(search) < 1 or len(search) >= 160:
     print("Invalid . search mst be 160 characters or less must be in the range of 1-160.")
 elif search in abbreviations:
     print(f"{abbreviations[search]}")
 else:
     print("Word not found!")
-        
