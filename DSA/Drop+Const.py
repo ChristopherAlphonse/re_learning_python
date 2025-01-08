@@ -5,5 +5,5 @@ def print_items(n):
     for j in range(n):
         print(j)
 
-print_items(10)
 
+print_items(10)
