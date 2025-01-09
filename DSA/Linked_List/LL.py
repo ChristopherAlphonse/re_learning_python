@@ -14,26 +14,70 @@ class LinkedList:
     def print_list(self):
         temp = self.head
         while temp is not None:
-            print(temp.value)
+            print(temp.value,  end=" -> ")
             temp = temp.next
+            if temp is None:
+                print(self.tail.next)
+        return temp
 
     def append(self, val):
-        temp = Node(val)
-
+        new_node = Node(val)
         if self.head is None:
-            self.head = temp
-            self.tail = temp
+            self.head = new_node
+            self.tail = new_node
         else:
-            self.tail.next = temp
-            self.tail = temp
+            self.tail.next = new_node
+            self.tail = new_node
         self.length += 1
-
         return True
 
+    def prepend(self, val):
+        new_node = Node(val)
+        if self.head is None:
+            self.head = new_node
+            self.tail = new_node
+        else:
+            temp = self.head
+            new_node.next = temp
+            self.head = new_node
+        self.length += 1
+        return True
 
-ll = LinkedList(1)
-ll.append(145)
-ll.append(5)
+    def pop(self):
+        if self.length == 0:
+            return None
+        temp = self.head
+        pre = self.head
+        while temp.next is not None:
+            pre = temp
+            temp = temp.next
+        self.tail = pre
+        self.tail.next = None
+        self.length -= 1
+        if self.length == 0:
+            self.head = None
+            self.tail = None
+        return temp
+
+    def pop_first(self):
+        if self.length == 0:
+            return None
+        temp = self.head
+        self.head = self.head.next
+        temp.next = None
+        self.length -= 1
+
+    def get_length(self):
+        print("Linked List length: ", self.length)
 
 
-print(ll.print_list())
+ll = LinkedList(2)
+ll.append(3)
+ll.prepend(1)
+ll.prepend(111)
+ll.pop_first()
+ll.pop_first()
+
+
+ll.print_list()
+ll.get_length()
