@@ -70,14 +70,31 @@ class LinkedList:
     def get_length(self):
         print("Linked List length: ", self.length)
 
+    def get(self, index):
+        if index < 0 or self.length == 0:
+            print("-1 Value not found")
+        temp = self.head
+        while temp is not None:
+            if temp.value == index:
+                print("Found:", temp.value)
+                return temp
+            temp = temp.next
+        print("Nothing was found")
+        return None
+
+    def set_value(self, index, val):
+        temp = self.get(index)
+        if temp is not None:
+            temp.value = val
+            return True
+        return False
+
 
 ll = LinkedList(2)
 ll.append(3)
 ll.prepend(1)
 ll.prepend(111)
-ll.pop_first()
-ll.pop_first()
 
-
+ll.set_value(1, 55)
 ll.print_list()
 ll.get_length()
