@@ -76,7 +76,6 @@ class LinkedList:
         temp = self.head
         while temp is not None:
             if temp.value == index:
-                print("Found:", temp.value)
                 return temp
             temp = temp.next
         print("Nothing was found")
@@ -89,12 +88,32 @@ class LinkedList:
             return True
         return False
 
+    def insert(self, index, val):
+        if index < 0 or index > self.length:
+            return False
+
+        if index == 0:
+            return self.prepend(val)
+
+        if index == self.length:
+            return self.append(val)
+
+        new_node = Node(val)
+        temp = self.get(index - 1)
+        new_node.next = temp.next
+        temp.next = new_node
+        self.length += 1
+        return True
+
 
 ll = LinkedList(2)
 ll.append(3)
 ll.prepend(1)
 ll.prepend(111)
+ll.prepend(111)
 
 ll.set_value(1, 55)
+
+ll.insert(0, 88)
 ll.print_list()
 ll.get_length()
