@@ -3,6 +3,9 @@ class Node:
         self.value = val
         self.next = None
 
+    def __str__(self):
+        return str(self.value)
+
 
 class LinkedList:
     def __init__(self, val):
@@ -10,16 +13,13 @@ class LinkedList:
         self.head = new_node
         self.tail = new_node
         self.length = 1
-        
-    def __str__(self);
-        return str(self.value)
 
     def print_list(self):
         temp = self.head
         while temp is not None:
             print(temp.value, end=" -> ")
             temp = temp.next
-        print("None")  # Mark the end of the list
+        print()
 
     def append(self, val):
         new_node = Node(val)
@@ -89,7 +89,6 @@ class LinkedList:
             return True
         return False
 
-
     def insert(self, index, value):
         new_node = Node(value)
         if index < 0 or index > self.length:
@@ -106,9 +105,9 @@ class LinkedList:
 
     def remove(self, index):
         if index < 0 or index >= self.length:
-            return None
+            print("Out of bound -1")
 
-        if index == self.length:
+        if index == self.length - 1:
             return self.pop()
         if index == 0:
             return self.pop_first()
@@ -123,7 +122,6 @@ class LinkedList:
         temp = self.head
         self.head = self.tail
         self.tail = temp
-        after = temp.next
         before = None
 
         for _ in range(self.length):
@@ -133,10 +131,49 @@ class LinkedList:
             temp = after
 
 
-ll = LinkedList(1)
-ll.append(2)
-ll.append(3)
-ll.append(4)
-ll.reverse()
-ll.print_list()
-ll.get_length()
+def remove_kth_from_end(ll, k):
+    slow = ll.head
+    fast = ll.head
+
+    for _ in range(k - 1):
+        if fast is None:
+            return None
+        fast = fast.next
+
+    while fast:
+        slow = slow.next
+        fast = fast.next
+    slow.next = slow.next.next
+
+    return slow
+
+
+def find_kth_from_end(ll, k):
+    slow = ll.head
+    fast = ll.head
+
+    for _ in range(k):
+        if fast is None:
+            return None
+        fast = fast.next
+
+    while fast:
+        slow = slow.next
+        fast = fast.next
+
+    return slow
+
+
+my_linked_list = LinkedList(1)
+my_linked_list.append(2)
+my_linked_list.append(3)
+my_linked_list.append(4)
+my_linked_list.append(5)
+my_linked_list.append(6)
+my_linked_list.append(7)
+my_linked_list.append(8)
+
+print(remove_kth_from_end(my_linked_list,  3))
+print(find_kth_from_end(my_linked_list, 3))
+# my_linked_list.remove(4)
+my_linked_list.print_list()
