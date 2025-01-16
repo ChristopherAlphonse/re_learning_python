@@ -114,21 +114,20 @@ class DoublyList:
     def remove(self, index):
         if index < 0 or index >= self.length:
             return None
-
         if index == 0:
-            temp = self.pop_first()
-        elif index == self.length - 1:
-            temp = self.pop()
-        else:
-            temp = self.get(index)
-            before = temp.prev
-            after = temp.next
+            return self.pop_first()
+        if index == self.length - 1:
+            return self.pop()
 
-            before.next = after
-            after.prev = before
+        temp = self.get(index)
+        before = temp.next
+        after = temp.prev
 
-            temp.next = None
-            temp.prev = None
+        before.prev = after
+        after.next = before
+
+        temp.next = None
+        temp.prev = None
 
         self.length -= 1
         return temp
@@ -140,7 +139,8 @@ DL.append(2)
 DL.append(3)
 DL.append(4)
 
-DL.set_value(2, 120)
+# DL.set_value(2, 120)
+DL.remove(1)
 
 
 # print(DL.length)
