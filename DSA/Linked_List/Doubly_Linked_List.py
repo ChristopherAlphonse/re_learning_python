@@ -132,6 +132,11 @@ class DoublyList:
         self.length -= 1
         return temp
 
+    def swap_first_last(self):
+        if self.head is None or self.head == self.tail:
+            return
+        self.head, self.tail = self.tail, self.head
+
 
 DL = DoublyList()
 DL.append(1)
@@ -140,8 +145,8 @@ DL.append(3)
 DL.append(4)
 
 # DL.set_value(2, 120)
-DL.remove(1)
+# DL.remove(1)
 
-
+DL.swap_first_last()
 # print(DL.length)
 DL.display()
