@@ -164,6 +164,17 @@ def find_kth_from_end(ll, k):
     return slow
 
 
+def reverse_recursively(head):
+    if head is None:
+        return
+
+    print(head)
+
+    reverse_recursively(head.next)
+
+    print(id(head), end=' -> ')
+
+
 my_linked_list = LinkedList(1)
 my_linked_list.append(2)
 my_linked_list.append(3)
@@ -173,7 +184,11 @@ my_linked_list.append(6)
 my_linked_list.append(7)
 my_linked_list.append(8)
 
-print(remove_kth_from_end(my_linked_list,  3))
-print(find_kth_from_end(my_linked_list, 3))
+# print(remove_kth_from_end(my_linked_list,  3))
+# print(find_kth_from_end(my_linked_list, 3))
+# my_linked_list.reverse()
 # my_linked_list.remove(4)
-my_linked_list.print_list()
+# my_linked_list.print_list()
+
+# print(reverse_recursively(my_linked_list.head))
+# print(id(reverse_recursively(my_linked_list.head)))
