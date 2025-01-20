@@ -2,7 +2,7 @@ class Node:
     def __init__(self, value):
         self.value = value
         self.next = None
-        
+
 
 class LinkedList:
     def __init__(self, value):
@@ -16,7 +16,7 @@ class LinkedList:
         while temp is not None:
             print(temp.value)
             temp = temp.next
-        
+
     def append(self, value):
         new_node = Node(value)
         if self.length == 0:
@@ -35,5 +35,3 @@ my_linked_list.append(23)
 my_linked_list.append(7)
 
 my_linked_list.print_list()
-
-
