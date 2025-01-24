@@ -190,5 +190,5 @@ my_linked_list.append(8)
 # my_linked_list.remove(4)
 # my_linked_list.print_list()
 
-# print(reverse_recursively(my_linked_list.head))
+
 # print(id(reverse_recursively(my_linked_list.head)))

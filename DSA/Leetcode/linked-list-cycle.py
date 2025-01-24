@@ -9,7 +9,6 @@
 
 # Return true if there is a cycle in the linked list. Otherwise, return false.
 
- 
 
 # Example 1:
 
@@ -29,20 +28,18 @@
 # Input: head = [1], pos = -1
 # Output: false
 # Explanation: There is no cycle in the linked list.
- 
+
 
 # Constraints:
 
 # The number of the nodes in the list is in the range [0, 104].
 # -105 <= Node.val <= 105
 # pos is -1 or a valid index in the linked-list.
- 
+
 
 # Follow up: Can you solve it using O(1) (i.e. constant) memory?
 
 ---
-
-
 
 
 # Definition for singly-linked list.
@@ -54,16 +51,13 @@
 class Solution:
     def hasCycle(self, head: Optional[ListNode]) -> bool:
         slow = head
-        fast = head 
-        
-        while fast is not None and fast.next is not None:
+        fast = head
+
+        while fast fast.next:
             slow = slow.next
             fast = fast.next.next
-            
+
             if fast == slow:
                 return True
-        
-        return False
 
-        
-        
+        return False
