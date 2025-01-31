@@ -21,3 +21,4 @@ def partitionList(strs):
 
 
 print(partitionList(strs))
+
