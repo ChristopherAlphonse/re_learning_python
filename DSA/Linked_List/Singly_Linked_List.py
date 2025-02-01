@@ -1,4 +1,4 @@
-class Node:
+class ListNode:
     def __init__(self, val):
         self.value = val
         self.next = None
@@ -9,9 +9,9 @@ class Node:
 
 class LinkedList:
     def __init__(self, val):
-        new_node = Node(val)
-        self.head = new_node
-        self.tail = new_node
+        new_ListNode = ListNode(val)
+        self.head = new_ListNode
+        self.tail = new_ListNode
         self.length = 1
 
     def print_list(self):
@@ -22,24 +22,24 @@ class LinkedList:
         print()
 
     def append(self, val):
-        new_node = Node(val)
+        new_ListNode = ListNode(val)
         if self.head is None:
-            self.head = new_node
-            self.tail = new_node
+            self.head = new_ListNode
+            self.tail = new_ListNode
         else:
-            self.tail.next = new_node
-            self.tail = new_node
+            self.tail.next = new_ListNode
+            self.tail = new_ListNode
         self.length += 1
         return True
 
     def prepend(self, val):
-        new_node = Node(val)
+        new_ListNode = ListNode(val)
         if self.head is None:
-            self.head = new_node
-            self.tail = new_node
+            self.head = new_ListNode
+            self.tail = new_ListNode
         else:
-            new_node.next = self.head
-            self.head = new_node
+            new_ListNode.next = self.head
+            self.head = new_ListNode
         self.length += 1
         return True
 
@@ -79,7 +79,6 @@ class LinkedList:
         temp = self.head
         for _ in range(index):
             temp = temp.next
-            # print(temp.value)
         return temp
 
     def set_value(self, index, val):
@@ -90,16 +89,16 @@ class LinkedList:
         return False
 
     def insert(self, index, value):
-        new_node = Node(value)
+        new_ListNode = ListNode(value)
         if index < 0 or index > self.length:
             return False
         if index == 0:
-            return self.prepend(new_node)
+            return self.prepend(new_ListNode)
         if index == self.length:
-            return self.append(new_node)
+            return self.append(new_ListNode)
         temp = self.get(index - 1)
-        new_node.next = temp.next
-        temp.next = new_node
+        new_ListNode.next = temp.next
+        temp.next = new_ListNode
         self.length += 1
         return True
 
@@ -118,17 +117,18 @@ class LinkedList:
         self.length -= 1
         return temp
 
-    def reverse(self):
-        temp = self.head
-        self.head = self.tail
-        self.tail = temp
-        before = None
+    def reverseList(self, head: ListNode) -> ListNode:
+        if head is None:
+            return None
 
-        for _ in range(self.length):
-            after = temp.next
-            temp.next = before
-            before = temp
-            temp = after
+        previous, current = None, head
+        while current:
+            _next = current.next
+            current.next = previous
+            previous = current
+            current = _next
+
+        return previous
 
 
 def remove_kth_from_end(ll, k):
@@ -168,11 +168,8 @@ def reverse_recursively(head):
     if head is None:
         return
 
-    print(head)
-
     reverse_recursively(head.next)
-
-    print(id(head), end=' -> ')
+    print(head, end=' -> ')
 
 
 my_linked_list = LinkedList(1)
@@ -184,11 +181,19 @@ my_linked_list.append(6)
 my_linked_list.append(7)
 my_linked_list.append(8)
 
-# print(remove_kth_from_end(my_linked_list,  3))
-# print(find_kth_from_end(my_linked_list, 3))
-# my_linked_list.reverse()
-# my_linked_list.remove(4)
-# my_linked_list.print_list()
+
+print("Original list:")
+my_linked_list.print_list()
 
 
-# print(id(reverse_recursively(my_linked_list.head)))
+reversed_head = my_linked_list.reverseList(my_linked_list.head)
+print("\nReversed list:")
+current = reversed_head
+while current:
+    print(current.value, end=" -> ")
+    current = current.next
+print()
+
+
+# print("\nRecursively reversed list:")
+# reverse_recursively(my_linked_list.head)
