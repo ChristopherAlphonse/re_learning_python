@@ -2,9 +2,9 @@ def productExceptSelf(nums):
     result = [0] * len(nums)
 
     prefix = 1
-    for element in range(len(nums)):
-        result[element] = prefix
-        prefix *= nums[element]
+    for index, value in enumerate(nums):
+        result[index] = prefix
+        prefix *= value
 
     postfix = 1
     for index in range(len(nums) - 1, -1, -1):
