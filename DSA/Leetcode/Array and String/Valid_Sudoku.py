@@ -41,9 +41,11 @@ class Solution:
                 cell_val = board[row][col]
                 if cell_val == ".":
                     continue
-                grid_index = (row // 3) * 3 + col // 3
+                grid_index = (row // 3) * 3 + col // 3  # 0-8
+
                 if cell_val in rows[row] or cell_val in cols[col] or cell_val in grid_boxes[grid_index]:
                     return False
+
                 rows[row].add(cell_val)
                 cols[col].add(cell_val)
                 grid_boxes[grid_index].add(cell_val)
@@ -60,3 +62,16 @@ print(solution.isValidSudoku(board2))
 
 # Time: 0(n^2) simplified | n is one side of the board we have 3 2d list/array
 # Space : 0(1) 81 boxes
+
+
+# Grid Indexes:
+
+# [0][1][2]
+# [3][4][5]
+# [6][7][8]
+
+# Subgrid breakdown:
+
+# Rows 0, 1, 2 -> Grid 0 | Rows 0, 1, 2 -> Grid 1 | Rows 0, 1, 2 -> Grid 2
+# Rows 3, 4, 5 -> Grid 3 | Rows 3, 4, 5 -> Grid 4 | Rows 3, 4, 5 -> Grid 5
+# Rows 6, 7,8 -> Grid 6 | Rows 6,7,8 -> Grid 7 | Rows 6,7,8 -> Grid 8

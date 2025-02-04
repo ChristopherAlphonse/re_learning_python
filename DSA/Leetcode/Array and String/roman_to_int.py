@@ -43,19 +43,50 @@
 # It is guaranteed that s is a valid roman numeral in the range [1, 3999]
 
 
+import unittest
+
+
 class Solution:
     def romanToInt(self, s: str) -> int:
-        my_store = {"I": 1, "V": 5, "X": 10, "L": 50, "C": 100, "D": 500, "M": 1000}
+        my_store = {"I": 1, "V": 5, "X": 10,
+                    "L": 50, "C": 100, "D": 500, "M": 1000}
         res = 0
         for index in range(len(s) - 1):
             if my_store[s[index]] < my_store[s[index + 1]]:
                 res -= my_store[s[index]]
             else:
                 res += my_store[s[index]]
-        res += my_store[s[-1]] # add the last
+        res += my_store[s[-1]]  # add the last
         return res
 
 
 s = "MCMXCIV"
 solution = Solution()
 print(solution.romanToInt(s))
+
+
+class TestSolution(unittest.TestCase):
+    def setUp(self):
+        self.solution = Solution()
+
+    def test_single_numeral(self):
+
+        self.assertEqual(self.solution.romanToInt("I"), 1)
+        self.assertEqual(self.solution.romanToInt("V"), 5)
+
+    def test_simple_addition(self):
+        self.assertEqual(self.solution.romanToInt("II"), 2)
+        self.assertEqual(self.solution.romanToInt("VII"), 7)
+
+    def test_subtraction_cases(self):
+        self.assertEqual(self.solution.romanToInt("IV"), 4)
+        self.assertEqual(self.solution.romanToInt("IX"), 9)
+        self.assertEqual(self.solution.romanToInt("XL"), 40)
+
+    def test_complex_cases(self):
+        self.assertEqual(self.solution.romanToInt("MCMXCIV"), 1994)
+        self.assertEqual(self.solution.romanToInt("MMMDCCCLXXXVIII"), 3888)
+
+
+if __name__ == '__main__':
+    unittest.main()
