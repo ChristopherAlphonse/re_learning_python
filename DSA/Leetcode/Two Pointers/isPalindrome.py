@@ -28,26 +28,31 @@
 # 1 <= s.length <= 2 * 105
 # s consists only of printable ASCII characters.
 
+
 class Solution:
     def isPalindrome(self, s: str) -> bool:
-        start_index = 0
-        end_index = len(s) - 1
-
-        while start_index < end_index:
-            while start_index < end_index and not self.isAlphaNumeric(s[start_index]):
-                start_index += 1
-            while end_index > start_index and not self.isAlphaNumeric(s[end_index]):
-                end_index -= 1
-            if s[start_index].lower() != s[end_index].lower():
+        start = 0
+        end = len(s)-1
+        while start < end:
+            if not self.isAlphaNum(s[start]):
+                start += 1
+                continue
+            elif not self.isAlphaNum(s[end]):
+                end -= 1
+                continue
+            elif s[start].lower() != s[end].lower():
                 return False
-            start_index += 1
-            end_index -= 1
+            else:
+                start += 1
+                end -= 1
         return True
 
-    def isAlphaNumeric(self, char: str) -> bool:
-        return (ord('A') <= ord(char) <= ord('Z') or
-                ord('a') <= ord(char) <= ord('z') or
-                ord('0') <= ord(char) <= ord('9'))
+    def isAlphaNum(self, s: str) -> bool:
+        return (
+            (ord('a') <= ord(s) <= ord('z')) or
+            (ord('A') <= ord(s) <= ord('Z')) or
+            (ord('0') <= ord(s) <= ord('9'))
+        )
 
 
 s2 = "A man, a plan, a canal: Panama"
