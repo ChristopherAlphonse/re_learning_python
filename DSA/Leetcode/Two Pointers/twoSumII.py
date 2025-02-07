@@ -40,13 +40,13 @@ class Solution:
         right = len(numbers) - 1
 
         while left < right:
-            if numbers[left] + numbers[right] == target:
+            current_sum = numbers[left] + numbers[right]
+            if current_sum == target:
                 return [left + 1, right + 1]
-            elif numbers[left] + numbers[right] > target:
+            elif current_sum > target:
                 right -= 1
             else:
-                if numbers[left] + numbers[right] < target:
-                    left += 1
+                left += 1
 
 
 numbers = [2, 7, 11, 15]
