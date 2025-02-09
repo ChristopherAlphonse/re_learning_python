@@ -1,5 +1,6 @@
 #  Best Time to Buy and Sell Stock
 
+
 # You are given an array prices where prices[i] is the price of a given stock on the ith day.
 
 # You want to maximize your profit by choosing a single day to buy one stock and choosing a different day in the future to sell that stock.
@@ -24,6 +25,7 @@
 # 1 <= prices.length <= 105
 # 0 <= prices[i] <= 104
 
+# although this can be solve with sliding window, i think the DP way is more readable.
 
 class Solution:
     def maxProfit(self, prices: list[int]) -> int:
