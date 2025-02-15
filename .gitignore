@@ -7,7 +7,9 @@ __pycache__/
 env/
 venv/
 ENV/
-.VENV/
+.venv/*
+.mypy_cache
+
 
 # Distribution and packaging
 *.egg
