@@ -29,9 +29,23 @@ def rle_decode(encoded_string: str) -> str:
     return ''.join(res)
 
 
+# s = "aaaaaabbbbbccca"
+# encoded_s = rle_encode(s)
+# print(f"Encoded: {encoded_s}")
+
+
+def encode(string):
+    if not string:
+        return string
+    res = {}
+    for i, v in enumerate(string):
+        res[v] = i
+    return res
+
+
 s = "aaaaaabbbbbccca"
-encoded_s = rle_encode(s)
+encoded_s = encode(s)
 print(f"Encoded: {encoded_s}")
 
-decoded_s = rle_decode(encoded_s)
-print(f"Decoded: {decoded_s}")
+# decoded_s = rle_decode(encoded_s)
+# print(f"Decoded: {decoded_s}")
