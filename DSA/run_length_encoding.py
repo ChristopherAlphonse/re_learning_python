@@ -28,5 +28,3 @@ def decode_rle(encoded_string):
     return res
 
 
-print(decode_rle(rle(s)))
-print(rle(s))
