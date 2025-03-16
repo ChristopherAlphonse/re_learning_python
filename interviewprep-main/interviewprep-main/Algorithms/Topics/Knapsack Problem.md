@@ -20,13 +20,13 @@ We can construct a 2D array to represent the capacity of the knapsack and the li
 $x$ axis = capacity
 $y$ axis = items
 
-| | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 |
-| - | - | - | - |  - |  - |  - |  - |  - |  - |  - |  - |  
-| [] | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 
-| [1, 2] | 0 | 0 | 1 | 1 | 1 | 1 | 1 | 1 | 1 | 1 | 1 | 
-| [4, 3] | 0 | 0 | 1 | 4 | 4 | 5 | 5 | 5 | 5 | 5 | 5 |
-| [5, 6] | 0 | 0 | 1 | 4 | 4 | 5 | 5 | 5 | 6 | 9 | 9 |
-| [6, 7] | 0 | 0 | 1 | 4 | 4 | 5 | 5 | 6 | 6 | 9 | 10 |
+|        | 0   | 1   | 2   | 3   | 4   | 5   | 6   | 7   | 8   | 9   | 10  |     |
+| ------ | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| []     | 0   | 0   | 0   | 0   | 0   | 0   | 0   | 0   | 0   | 0   | 0   |     |
+| [1, 2] | 0   | 0   | 1   | 1   | 1   | 1   | 1   | 1   | 1   | 1   | 1   |     |
+| [4, 3] | 0   | 0   | 1   | 4   | 4   | 5   | 5   | 5   | 5   | 5   | 5   |     |
+| [5, 6] | 0   | 0   | 1   | 4   | 4   | 5   | 5   | 5   | 6   | 9   | 9   |     |
+| [6, 7] | 0   | 0   | 1   | 4   | 4   | 5   | 5   | 6   | 6   | 9   | 10  |     |
 
 Remember that for dynamic programming, the base case is often `0` or an empty array, so your array should be init'd one larger than you might normally.
 
