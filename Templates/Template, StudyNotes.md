@@ -1,8 +1,10 @@
-tags: 
-created: <% tp.file.creation_date() %>
-## Problem
-## Solution
+## Title
 
-<% tp.file.cursor() %>
+tags:
+created: <% tp.file.creation_date() %>
+
+## Problem
+
+## Solution
 
 ## Plan
