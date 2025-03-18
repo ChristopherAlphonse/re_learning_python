@@ -1,33 +1,63 @@
-# Queues
-These support two operations, `enqueue` and `dequeue`.
+# Queue
 
-Queues are an example of First-In, First-Out or FIFO - the opposite to a [[Stack]].
+```py
+from heapq import heappush, heappop
 
-# Priority Queue
-This is a special type of queue where `enqueue` takes both a value `T` but also a priority `p`.
+class Node:
+    def __init__(self, value):
+        self.value = value
+        self.next = None
 
-Think of it like a queue in a hospital - those who are higher priority get seen first. A priority queue is often used in computer processors to work out what to compute next - for instance, keyboard input is first priority.
+class Queue:
+    def __init__(self):
+        self.front = self.rear = None
 
-# Kotlin
-In Kotlin, a Queue is normally represented with a [[Linked List]]:
+    def enqueue(self, value):
+        """ Adds an item to the queue. """
+        new_node = Node(value)
+        if self.rear:
+            self.rear.next = new_node
+        self.rear = new_node
+        if not self.front:
+            self.front = new_node
 
-```kotlin
-val queue = LinkedList<Int>()
+    def dequeue(self):
+        """ Removes and returns the front item of the queue. """
+        if self.is_empty():
+            raise IndexError("Dequeue from an empty queue")
+        value = self.front.value
+        self.front = self.front.next
+        if not self.front:
+            self.rear = None
+        return value
 
-queue.add(1)
-// or
-queue.offer(1)
+    def peek(self):
+        """ Returns the front item without removing it. """
+        return self.front.value if self.front else None
 
-val dequeued = queue.remove()
-// or
-val dequeued = queue.poll()
+    def is_empty(self):
+        """ Checks if the queue is empty. """
+        return self.front is None
 
-val last = queue.peek()
+class PriorityQueue:
+    def __init__(self):
+        self.heap = []
+
+    def enqueue(self, value, priority):
+        """ Adds an item with priority to the queue. """
+        heappush(self.heap, (priority, value))
+
+    def dequeue(self):
+        """ Removes and returns the highest priority item. """
+        if self.is_empty():
+            raise IndexError("Dequeue from an empty priority queue")
+        return heappop(self.heap)[1]
+
+    def peek(self):
+        """ Returns the highest priority item without removing it. """
+        return self.heap[0][1] if self.heap else None
+
+    def is_empty(self):
+        """ Checks if the priority queue is empty. """
+        return not self.heap
 ```
-
-## Implementation
-Can be implemented with two stacks:
-
-- on enqueue, move all items from stack one to stack two
-- add item to stack one
-- move all items back to stack one

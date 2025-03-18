@@ -1,15 +1,36 @@
 # Stacks
 
-Supports two operations - `push` to add an item and `pop` to remove.
+```py
+class Node:
+    def __init__(self, value):
+        self.value = value
+        self.next = None
 
-Stacks are known as Last-In, First-Out (LIFO), which is the opposite of a [[Queue]].
+class Stack:
+    def __init__(self):
+        self.top = None
 
-In Kotlin, these are also represented by a [[Linked List]]:
+    def push(self, value):
+        """ Pushes a value onto the stack. """
+        new_node = Node(value)
+        new_node.next = self.top
+        self.top = new_node
 
-```kotlin
-val stack = LinkedList<Int>()
+    def pop(self):
+        """ Removes and returns the top value of the stack. """
+        if self.is_empty():
+            raise IndexError("Pop from an empty stack")
+        value = self.top.value
+        self.top = self.top.next
+        return value
 
-stack.push(1)
+    def peek(self):
+        """ Returns the top value without removing it. """
+        if self.is_empty():
+            return None
+        return self.top.value
 
-stack.pop() `should be equal to` 1
+    def is_empty(self):
+        """ Checks if the stack is empty. """
+        return self.top is None
 ```

@@ -1,22 +1,30 @@
 # Array List
-Prefer an Array over a [[Linked List]] when:
-- You frequently need to access to data at random positions
-- You need extreme performance on lookup ($O(1)$)
-- You know the size of the dataset in advance - remember there's a penalty for growing an Array
 
-Typically, Arrays don't automatically resize, however the ArrayList class in Java do. Normal implementation is when the ArrayList is full, it doubles in size (resizing factor of 2).
-    - This doubling takes $O(n)$.
-    - It happens so infrequently that the amortized insertion time is still $O(1)$ for a single element
-    - For many elements, $O(n)$
+## When to Use an Array List
 
-# Big O
-### Time
-- O(n) to add or remove an item at the start of the list
-- O(1) to add or remove an item at the end of the list
-- O(1) to find an access via an index
-- O(1) to update or replace an item
-- O(n) to insert or remove elsewhere
+Prefer an Array List over a Linked List when:
 
-### Space
-- Contiguous memory, and the proximity of the items helps performance
-- Space required = (array capacity, which is >=n) * size of item = O(n)
+-   You frequently need to access data at random positions.
+-   You need extreme performance on lookups (**O(1)** access time).
+-   You know the size of the dataset in advance (resizing incurs a performance penalty).
+
+### Resizing Behavior
+
+-   Arrays typically do not resize automatically.
+-   `ArrayList` in Java resizes dynamically, usually doubling in size when full.
+-   Resizing takes **O(n)** but happens infrequently, making the **amortized insertion time O(1)**.
+
+## Big O Complexity
+
+### Time Complexity
+
+-   **O(n)** to add or remove an item at the start of the list.
+-   **O(1)** to add or remove an item at the end of the list.
+-   **O(1)** to access an item via an index.
+-   **O(1)** to update or replace an item.
+-   **O(n)** to insert or remove an item elsewhere.
+
+### Space Complexity
+
+-   Uses contiguous memory, which improves performance due to data locality.
+-   Space required: **O(n)**, where `n` is the number of elements.

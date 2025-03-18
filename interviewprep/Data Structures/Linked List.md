@@ -1,82 +1,84 @@
-# Linked-Lists
-Prefer a Linked List over an [[Array and String]] when:
-- You require very fast insertions or deletions
-- You don't need random access to items in the list (you have to start from position 0 and iterate)
-- You can't evaluate the exact size of the list (it may grow or shrink during execution)
+# Linked Lists
 
-# Big O
-### Time
-- $O(1)$ to add or remove an item at the start of the list
-- $O(n)$ to add or remove an item at the end of the list
-- $O(n)$ to find and access via an index
-- $O(1)$ to update
-- $O(n)$ to insert or remove elsewhere
+## When to Use a Linked List
 
-# Singley-Linked
-Has a nullable reference to the next node in the List:
-```java
-class Node<T> {
-	T item;
-	@Nullable next Node;
-}
+Prefer a Linked List over an Array or String when:
+
+-   You require very fast insertions or deletions.
+-   You don't need random access to items in the list (traversal is sequential).
+-   The list size is dynamic and may grow or shrink during execution.
+
+## Big O Complexity
+
+### Time Complexity
+
+-   **O(1)** to add or remove an item at the start of the list.
+-   **O(n)** to add or remove an item at the end of the list.
+-   **O(n)** to find and access an element via an index.
+-   **O(1)** to update an element.
+-   **O(n)** to insert or remove an element elsewhere in the list.
+
+## Singly Linked List
+
+A singly linked list contains a reference to the next node:
+
+```python
+class Node:
+    def __init__(self, value):
+        self.value = value
+        self.next = None
 ```
 
-# Doubley-Linked
-Has nullable references to both the next and previous nodes in the list:
-```java
-class Node<T> {
-	T item;
-	@Nullable next Node;
-    @Nullable previous Node;
-}
+## Doubly Linked List
+
+A doubly linked list contains references to both the next and previous nodes:
+
+```python
+class Node:
+    def __init__(self, value):
+        self.value = value
+        self.next = None
+        self.prev = None
 ```
 
-# Delete Kth Node from LinkedList
-* Use two pointers 
-	* Move the first pointer `k` steps away from the head
-	* Move both in unison until the end of the list
-	* Delete the node at the first pointer
+## Delete Kth Node from Linked List
 
-```kotlin
-fun removeKthNodeFromEnd(head: LinkedList, k: Int) {
-    var counter = 1
-	var first = head
-	var current: LinkedList? = head
-	
-	while (counter <= k) {
-		current = current!!.next
-		counter++
-	}
-	
-	if (current == null) {
-		head.value = head.next!!.value
-		head.next = head.next!!.next
-		return
-	}
-	
-	while (current!!.next != null) {
-		current = current.next
-		first = first.next!!
-	}
-	
-	first.next = first.next!!.next
-}
+-   Use two pointers:
+    -   Move the first pointer `k` steps away from the head.
+    -   Move both pointers together until the first pointer reaches the end.
+    -   Delete the node at the second pointer.
+
+```python
+def remove_kth_node_from_end(head, k):
+    first = second = head
+    for _ in range(k):
+        if first is None:
+            return head
+        first = first.next
+
+    if first is None:
+        return head.next
+
+    while first.next:
+        first = first.next
+        second = second.next
+
+    second.next = second.next.next
+    return head
 ```
 
-# Reverse Linked List
+## Reverse a Linked List
 
-```kotlin
-fun reverseList(head: ListNode?): ListNode? {
-	var previous: ListNode? = null
-	var current: ListNode? = head
+```python
+def reverse_list(head):
+    prev = None
+    current = head
 
-	while (current != null) {
-		val temp = current.next
-		current.next = previous
-		previous = current
-		current = temp
-	}
+    while current:
+        temp = current.next
+        current.next = prev
+        prev = current
+        current = temp
 
-	return previous
-}
+    return prev
 ```

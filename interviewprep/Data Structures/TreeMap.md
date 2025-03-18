@@ -1,21 +1,38 @@
 # TreeMap
 
-The `TreeMap` interface in Java is used to implement `Map`. The `Map` is sorted according to the natural ordering of its keys, or by a `Comparator` implementation.
+```py
+from sortedcontainers import SortedDict
 
-Because these keys are sorted, you can fetch a submap using keys. This makes it particularly useful for questions where you might need to keep track of the incidences of something but also search that list.
+class TreeMap:
+def **init**(self):
+self.map = SortedDict()
 
-```kotlin
-fun <K,V> subMap(fromKey: K, toKey: K): SortedMap<K, V>
+    def put(self, key, value):
+        """ Inserts a key-value pair into the TreeMap. """
+        self.map[key] = value
+
+    def get(self, key):
+        """ Retrieves the value associated with the given key. """
+        return self.map.get(key, None)
+
+    def remove(self, key):
+        """ Removes the key-value pair if the key exists. """
+        if key in self.map:
+            del self.map[key]
+
+    def contains(self, key):
+        """ Checks if a key exists in the TreeMap. """
+        return key in self.map
+
+    def sub_map(self, from_key, to_key):
+        """ Returns a submap within the given key range [from_key, to_key). """
+        return {k: self.map[k] for k in self.map.irange(from_key, to_key, (True, False))}
+
+    def first_key(self):
+        """ Returns the first (smallest) key. """
+        return self.map.peekitem(0)[0] if self.map else None
+
+    def last_key(self):
+        """ Returns the last (largest) key. """
+        return self.map.peekitem(-1)[0] if self.map else None
 ```
-
-In Kotlin you can call `toSortedMap()` on a `Map`.
-
-TreeMap provides a performance of $O(log \cdot n)$ for most operations like `add()`, `remove()` and `contains()`.
-
-## Uses
-TreeMaps are particularly useful when looking up ranges, such as time intervals.
-
-## Implementation
-Internally, a TreeMap is maintained via a [[Red-Black Tree]].
-
-Therefore, operations like `add`, `remove` and `contains` are all $O(log \cdot n)$.
