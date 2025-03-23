@@ -1,6 +1,6 @@
 [Topic] #Math #string
 
-Relevant link: <https://en.wikipedia.org/wiki/Euclidean_algorithm>
+Relevant link: <https://en.wikipedia.org/wiki/Euclidean_algorithm> , <https://docs.python.org/3/library/math.html>
 
 For two strings s and t, we say "t divides s" if and only if s = t + t + t + ... + t + t (i.e., t is concatenated with itself one or more times).
 
@@ -37,11 +37,10 @@ class Solution:
 
 
         def calculate_gcd(a, b):
-            while b:
-                a = b
-                b = a % b        
-            return a
-
+            while b:
+                a , b = b , a % b
+            return a       
+           
         remainder = calculate_gcd(len(str1), len(str2))
         return str1[:remainder]
 ```
