@@ -31,40 +31,28 @@ The vowels in `s` are `['I', 'e', 'e', 'A']`. On reversing the vowels, s beco
 
 ```python
 class Solution:
+    def reverseVowels(self, s: str) -> str:
+        string = list(s)
+        left, right = 0, len(s) - 1
 
-    def reverseVowels(self, s: str) -> str:
+        while left < right:
+            while left < right and not isVowel(string[left]):
+                left += 1
+            while left < right and not isVowel(string[right]):
+                right -= 1
 
-        word = list(s)
+            
+            string[left], string[right] = string[right], string[left]
+            left += 1
+            right -= 1
 
-        left = 0
+        return ''.join(string)
 
-        right = len(s) - 1
 
-        v_bank = "aeiouAEIOU"
+def isVowel(char: str) -> bool:
+    vowels = "aeiouAEIOU"
+    return len(char) == 1 and ord('A') <= ord(char) <= ord('z') and char in vowels
 
-  
-
-        while left < right:
-
-            if word[left] in v_bank and word[right] in v_bank:
-
-                word[left], word[right] = word[right], word[left]
-
-                left += 1
-
-                right -= 1
-
-            elif word[left] not in v_bank:
-
-                left += 1
-
-            else:
-
-                right -= 1
-
-  
-
-        return "".join(word)
 ```
 
 

@@ -37,15 +37,46 @@ Return _a string of the words in reverse order concatenated by a single space._
 [Solution]
 
 ```python
+# optimal
+class Solution:
+    def reverseWords(self, s: str) -> str:
+        
+        s = list(s)  
+        self.reverse(s, 0, len(s) - 1)
+        start = 0
+        
+        for end in range(len(s) + 1):
+            if end == len(s) or s[end] == ' ': 
+                self.reverse(s, start, end - 1)
+                start = end + 1    
+        return "".join(s) 
+    
+    def reverse(self, s, left, right):
+        while left < right:
+            s[left], s[right] = s[right], s[left]
+            left += 1
+            right -= 1
+
+```
+
+```python
+# preffered for readibilty 
 class Solution:
 
     def reverseWords(self, s: str) -> str:
+        words = s.split()
+        return self.reverseStrings(words)
 
-        result = []
+  
 
-        word = s.split()
+    def reverseStrings(self, s):
+        left = 0
+        right = len(s) - 1
 
-        return " ".join(word[::-1])
+        while left < right:
+            s[left], s[right] = s[right], s[left]
+            left += 1
+            right -= 1
+
+        return " ".join(s)
 ```
-
-*note to future self: try to solve without built in method 
