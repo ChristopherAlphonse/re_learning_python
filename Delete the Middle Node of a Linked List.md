@@ -1,4 +1,4 @@
-Relevant link:  [2095. Delete the Middle Node of a Linked List](https://leetcode.com/problems/delete-the-middle-node-of-a-linked-list/)
+**Relevant** link:  [2095. Delete the Middle Node of a Linked List](https://leetcode.com/problems/delete-the-middle-node-of-a-linked-list/)
 
 You are given the `head` of a linked list. **Delete** the **middle node**, and return _the_ `head` _of the modified linked list_.
 
