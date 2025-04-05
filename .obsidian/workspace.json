@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Max Number of K-Sum Pairs.md",
-                "mode": "preview",
+                "file": "interviewprep/Data Structures/Trees/Breadth-First Search.md",
+                "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Max Number of K-Sum Pairs"
+              "title": "Breadth-First Search"
             }
           }
         ]
@@ -78,8 +78,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 373.5086555480957,
-    "collapsed": true
+    "width": 373.5086555480957
   },
   "right": {
     "id": "1ed682d0f8d1cdb9",
@@ -189,9 +188,24 @@
   },
   "active": "757dfe76c1e0deab",
   "lastOpenFiles": [
+    "interviewprep/Algorithms/Contents.md",
+    "interviewprep/Algorithms/Topics/Kadane's Algorithm.md",
+    "interviewprep/Common Strategies.md",
+    "interviewprep/Algorithmic Complexity and Big O Notation.md",
+    "interviewprep/Algorithms/Topics/Topological Sort.md",
+    "interviewprep/Algorithms/Topics/Rotate an Array.md",
+    "interviewprep/Algorithms/Topics/Range-Sum Query.md",
+    "interviewprep/Algorithms/Topics/Quick Sort.md",
+    "interviewprep/Algorithms/Topics/Merge Sort.md",
+    "interviewprep/Algorithms/Topics/Merge Intervals.md",
+    "interviewprep/Algorithms/Topics/Knapsack Problem.md",
+    "interviewprep/Algorithms/Topics/Dynamic Programming.md",
+    "interviewprep/Algorithms/Topics/Dijkstra.md",
+    "interviewprep/Algorithms/Topics/Bubble Sort.md",
+    "interviewprep/Algorithms/Topics/Binary Search.md",
+    "Max Number of K-Sum Pairs.md",
     "Templates/Template, StudyNotes.md",
     "README.md",
-    "Max Number of K-Sum Pairs.md",
     "interviewprep/Leetcode 75/Array and String/Reverse Words in a String.md",
     "interviewprep/Leetcode 75/Array and String/String Compression.md",
     "Delete the Middle Node of a Linked List.md",
@@ -200,23 +214,8 @@
     "interviewprep/Leetcode 75/Array and String/Increasing Triplet Subsequence.md",
     "interviewprep/Leetcode 75/Array and String/Product of Array Except Self.md",
     "lecture/Divide and Conquer Algorithms.md",
-    "interviewprep/Leetcode 75/Array and String/Reverse Vowels of a String.md",
-    "interviewprep/Leetcode 75/Array and String/Merge Strings Alternately.md",
-    "interviewprep/Leetcode 75/Array and String/Kids With the Greatest Number of Candies.md",
-    "202503161413.md",
     "Untitled 1.canvas",
     "Untitled.canvas",
-    "lecture/interviewprep-main/interviewprep-main/Algorithms/Topics/Kadane's Algorithm.md",
-    "lecture/interviewprep-main/interviewprep-main/Algorithms/Topics/Dynamic Programming.md",
-    "lecture/interviewprep-main/interviewprep-main/Algorithms/Topics/Dijkstra.md",
-    "lecture/interviewprep-main/interviewprep-main/Algorithms/Topics/Bubble Sort.md",
-    "lecture/interviewprep-main/interviewprep-main/Data Structures/Linked List.md",
-    "lecture/interviewprep-main/interviewprep-main/Data Structures/Hash Table.md",
-    "lecture/interviewprep-main/interviewprep-main/Data Structures/Array and String.md",
-    "lecture/interviewprep-main/interviewprep-main/Leetcode 75/Array and String/Merge Strings Alternately.md",
-    "lecture/interviewprep-main/interviewprep-main/Leetcode 75/Array and String/Kids With the Greatest Number of Candies.md",
-    "lecture/interviewprep-main/interviewprep-main/Leetcode 75/Array and String/Greatest Common Divisor of Strings.md",
-    "Untitled 2.md",
     "Templates",
     "lecture/interviewprep-main/template"
   ]

@@ -1,4 +1,4 @@
-# Breadth-First Search
+
 
 In Breadth-First Search, an algorithm starts at the root of the tree again but it explores neighbor nodes first, before moving to the next-level neighbors.
 
@@ -13,7 +13,7 @@ graph TB
     7 --> 11 & 12
 ```
 
-Usecases:
+Use cases:
 * Copying garbage collection
 * Finding the shortest path between two nodes, with the path measured by the number of edges
 * Testing a graph for bipartiteness

@@ -1,8 +1,7 @@
-# Common Strategies
 
 https://hackernoon.com/14-patterns-to-ace-any-coding-interview-question-c5bb3357f6ed
 
-## Cheat Sheet
+## [Cheat Sheet]
 
 > 1.  IF sorted THEN (binary search OR two pointer)
 > 2.  IF all permutations/subsets THEN backtracking
@@ -15,238 +14,282 @@ https://hackernoon.com/14-patterns-to-ace-any-coding-interview-question-c5bb3357
 > 9.  IF common strings THEN (map OR trie)
 > 10. ELSE (map/set for $O(n)$ time $O(n)$ space or sort for $O(n \cdot log \cdot n)$ time $O(1)$ space)
 
-## Multiple pointers
+## [Multiple pointers]
+*For problems involving arrays, strings, or linked lists, using two pointers (fast and slow) can often be helpful.*
 
-When iterating through arrays, strings, Linked Lists - having two pointers - a fast one and a slow one, or one high one low, is often part of the solution.
-
-## Iterate in reverse
-
-Many solutions involve either traversing an array from the right-hand side or adding elements to an array from the end. This is especially common with `String` related questions.
-
-## Sorting
-
-Could the problem be made any simpler by pre-sorting the inputs? This tends to enable [[Binary Search]] - which can be used on more than just numbers!
-
-## Backtracking
-
-This strategy is used when the solution is a series of choices, and each choice constraints subsequent choices. These types of problems are known as Constraint Satisfaction Problems (CSPs), and are generally solved with recursion.
-
-Backtracking problems can be thought of as trees where decisions are made at each node. When we evaluate a new node and decide it's not for us, we backtrack to the parent and investigate the next node. In doing so, we are _pruning_ the recursion tree - rather than enumerating all possible choices, we're eagerly rejecting invalid decisions.
-
-```mermaid
-graph TD
-	A --> N
-	A ==> I
-	N --> T
-	N --> D
-	I ==> M
-	I --> R
-
-	T --> id1(ANT)
-	D --> id2(AND)
-	M ==> id3(AIM)
-	R --> id4(AIR)
-
+``` mermaid
+flowchart TD
+    A["Start"] --> B["Initialize left pointer (L) at start"]
+    B --> C["Initialize right pointer (R) at end"]
+    C --> D{"Is L < R?"}
+    D -- "Yes" --> E["Process elements at L and R"]
+    E --> F["Move L to right (L = L + 1)"]
+    F --> G["Move R to left (R = R - 1)"]
+    G --> D
+    D -- "No" --> H["Finish processing"]
 ```
 
-### General Algorithm
 
-```javascript
-function backtrack(candidate)
-    if find_solution(candidate) {
+Example:
+```python
+def move_pointers(arr):
+    slow = 0
+    fast = 0
+    while fast < len(arr):
+        if arr[fast] != arr[slow]:
+            slow += 1
+            arr[slow] = arr[fast]
+        fast += 1
+    return arr[:slow+1]
+```
+
+## [Iterating in Reverse]
+*Some solutions require iterating from the end of the array. This is especially useful for string-related problems.*
+
+Example:
+```python
+def reverse_iterate(arr):
+    for i in range(len(arr)-1, -1, -1):
+        print(arr[i])
+```
+
+## [Sorting and Binary Search]
+*Sorting the input can often make a problem simpler, enabling the use of binary search.*
+
+Example:
+```python
+def binary_search(arr, target):
+    arr.sort()
+    left, right = 0, len(arr) - 1
+    while left <= right:
+        mid = left + (right - left) // 2
+        if arr[mid] == target:
+            return mid
+        elif arr[mid] < target:
+            left = mid + 1
+        else:
+            right = mid - 1
+    return -1
+```
+
+## [Backtracking]
+*Used when problems involve a series of choices, where each choice constrains subsequent choices. We try every possibility and "backtrack" when we reach a dead end.*
+
+``` mermaid
+graph TD
+
+    A[Start] --> B[Find solution?]
+
+    B -- Yes --> C[Output result]
+
+    C --> D[Return]
+
+    B -- No --> E[Iterate over candidates]
+
+    E --> F[Is candidate valid?]
+
+    F -- Yes --> G[Place candidate]
+
+    G --> H[Call backtrack with candidate]
+
+    H --> I[Backtrack remove candidate]
+
+    F -- No --> E
+
+    E --> D
+```
+
+
+
+**General Algorithm:**
+```python
+def backtrack(candidate):
+    if find_solution(candidate):
         output(candidate)
         return
-	}
-
-    // iterate all possible candidates.
-    for next_candidate in list_of_candidates
-        if is_valid(next_candidate)
-            // try this partial candidate solution
+    
+    for next_candidate in candidates:
+        if is_valid(next_candidate):
             place(next_candidate)
-            // given the candidate, explore further.
             backtrack(next_candidate)
-            // backtrack
             remove(next_candidate)
 ```
+**Example:** Find all combinations of `k` numbers that sum up to `n`:
 
-### Example
+```python
+def combination_sum3(k, target):
+    results = []
+    backtrack(target, k, 1, results, [])
+    return results
 
-Find all valid combinations of `k` numbers that sum up to `n` such that the following conditions are true:
-
--   Only numbers `1` through `9` are used.
--   Each number is used **at most once**.
-
-Return _a list of all possible valid combinations_. The list must not contain the same combination twice, and the combinations may be returned in any order.
-
-```kotlin
-fun combinationSum3(k: Int, target: Int): List<List<Int>> {
-	val results = mutableListOf<List<Int>>()
-	backtrack(target, k, 0, results, LinkedList())
-	return results
-}
-
-private fun backtrack(
-	remain: Int,
-	k: Int,
-	nextStart: Int,
-	results: MutableList<List<Int>>,
-	combinations: LinkedList<Int>
-) {
-	// Basecase where nothing remaing having chosen k integers
-	if (remain == 0 && combinations.size == k) {
-		results.add(combinations.toList())
-		return
-	// Basecase where we missed the target with k integers
-	} else if (remain < 0 || combinations.size == k) {
-		return
-	}
-
-	for (index in nextStart until 9) {
-		combinations.add(index + 1)
-		backtrack(remain - index - 1, k, index + 1, results, combinations)
-		combinations.removeLast()
-	}
-}
+def backtrack(remain, k, start, results, comb):
+    if remain == 0 and len(comb) == k:
+        results.append(list(comb))
+        return
+    for i in range(start, 10):
+        comb.append(i)
+        backtrack(remain - i, k, i + 1, results, comb)
+        comb.pop()
 ```
 
-## Greedy Algorithms
+## [Greedy Algorithms]
+*Greedy algorithms make locally optimal choices at each step, hoping they lead to a globally optimal solution. They are faster but may not always give the best result. 
 
-This is the opposite of backtracking - optimize for a certain thing (for instance, value of items in a knapsack) and never backtrack. You cannot guarantee that this method will produce the optimum solution, but it will likely be _good enough_ for some types of problems, and much faster.
+``` mermaid
+graph TD
+    A[Start] --> B[Sort items by value-to-weight ratio]
+    B --> C[Initialize total_value = 0]
+    C --> D[For each item in sorted list]
+    D --> E[Can the item fit?]
+    E -- Yes --> F[Add item to total_value]
+    F --> G[Reduce capacity]
+    G --> D
+    E -- No --> H[End loop]
+    H --> I[Return total_value]
 
-We don't investigate whether or not the previous choice makes a difference to future choices.
-
-## Divide and conquer
-
-Divide problems into smaller pieces with optimal substructure and compute from there.
-
-For instance: merge sort, $O(n \cdot log \cdot n)$
-
-```javascript
-function merge_sort(list)
-    if list.length == 1
-        return list
-
-    left <- list.first_half
-    right <- list.second_half
-
-    return merge(
-        merge_sort(left),
-        merge_sort(right)
-    )
+```
+Example:
+```python
+def greedy_knapsack(weights, values, capacity):
+    n = len(weights)
+    ratio = [(v / w, v, w) for v, w in zip(values, weights)]
+    ratio.sort(reverse=True)
+    
+    total_value = 0
+    for r, v, w in ratio:
+        if capacity >= w:
+            capacity -= w
+            total_value += v
+        else:
+            break
+    return total_value
 ```
 
-## Dynamic Programming
+## [Divide and Conquer]
+*Break the problem into smaller sub-problems, solve each sub-problem, and combine the results.
 
-Identifying identical/overlapping sub-problems so that we don't have to compute them more than once - see [[Dynamic Programming]]. Consider Fibonacci:
+``` mermaid
+graph TD
+    A[Start] --> B[Is list length <= 1?]
+    B -- Yes --> C[Return list]
+    B -- No --> D[Split list into two halves]
+    D --> E[Merge sort left half]
+    D --> F[Merge sort right half]
+    E --> G[Merge left and right]
+    F --> G
+    G --> H[Return merged list]
 
-```javascript
-function fib(n)
-    if n <= 2
+```
+
+Example: **Merge Sort**
+```python
+def merge_sort(arr):
+    if len(arr) <= 1:
+        return arr
+    mid = len(arr) // 2
+    left = merge_sort(arr[:mid])
+    right = merge_sort(arr[mid:])
+    return merge(left, right)
+
+def merge(left, right):
+    result = []
+    i = j = 0
+    while i < len(left) and j < len(right):
+        if left[i] < right[j]:
+            result.append(left[i])
+            i += 1
+        else:
+            result.append(right[j])
+            j += 1
+    result.extend(left[i:])
+    result.extend(right[j:])
+    return result
+```
+
+## [Dynamic Programming] (DP)
+*Identify overlapping sub-problems and store the results to avoid redundant calculations.
+
+### Fibonacci with Memorization:
+
+
+```python
+memo = {}
+
+def fib(n):
+    if n <= 2:
         return 1
-
-    return fib(n - 1) + fib(n - 2)
+    if n not in memo:
+        memo[n] = fib(n - 1) + fib(n - 2)
+    return memo[n]
 ```
 
-In the recursive solution, `fib(3)` would be calculated multiple times. We can store these values so that we don't have to calculate them repeatedly:
 
-```javascript
-M <- [1 => 1; 2 => 2]
-function d_fib(n)
-    if n not in M
-        M[n] <- d_fib(n - 1) + d_fib(n - 2)
-    return M[n]
+### Knapsack Problem:
+
+``` mermaid
+graph TD
+
+    A[Start] --> B[Create DP table with size n+1 x capacity+1]
+
+    B --> C[For each item i from 1 to n]
+
+    C --> D[For each capacity w from 0 to max capacity]
+
+    D --> E{Is item i's weight <= current capacity?}
+
+    E -->|Yes| F[Take maximum of previous or current item plus value]
+
+    E -->|No| G[Carry forward previous result]
+
+    F --> D
+
+    G --> D
+
+    D --> H[Return value of DP table at n and capacity]
 ```
 
-Often these solutions involve matrices and summing the surrounding values - could these be stored in temporary variables only, reducing the space complexity from $O(n \cdot m)$ to $O(1)$?
-
-Remember that for dynamic programming, the base case is often `0`, so many arrays will be built as such:
-
-```kotlin
-fun knapsackProblem(items: List<List<Int>>, capacity: Int): Pair<Int, List<Int>> {
-    val array = List(items.size + 1) { MutableList(capacity.size + 1) { 0 } }
-
-	// ...
-}
+```python
+def knapsack(values, weights, capacity):
+    dp = [[0] * (capacity + 1) for _ in range(len(values) + 1)]
+    
+    for i in range(1, len(values) + 1):
+        for w in range(capacity + 1):
+            if weights[i - 1] <= w:
+                dp[i][w] = max(dp[i - 1][w], dp[i - 1][w - weights[i - 1]] + values[i - 1])
+            else:
+                dp[i][w] = dp[i - 1][w]
+    return dp[len(values)][capacity]
 ```
 
-See also [[Knapsack Problem]].
+## [Sliding Window]
+*Sliding windows are used to reduce redundant calculations, especially for problems involving contiguous subarrays or substrings.
 
-There's two main approaches in dynamic programming:
+``` mermaid
+graph TD
 
-### Memoization
+    A[Start] --> B[Initialize windowSize]
 
-Memoization is where we add caching to a function - typically this is used on recursive functions for a **top-down** solution that starts with the initial problem and then recursively calls itself to solve smaller problems.
+    B --> C[Set window start position = 0]
 
-### Tabulation
+    C --> D(Check if window is within collection bounds)
 
-Tabulation uses a table to keep track of sub-problem results and works in a **bottom-up** manner: solving the smallest sub-problems in an iterative manner before solving the larger ones.
+    D -->|Yes| E[Process current window elements]
 
-## Branch and Bound
+    E --> F[Increment window start position]
 
-Many problems involve trying to find maximum profits, shortest paths etc - these are called _optimization problems_. When the solution is a series of choices, we can use a strategy called Branch and Bound.
+    F --> D
 
-## Sliding Window
-
-Given an array:
-
-```javascript
-[a b c d e f g h]
+    D -->|No| G[End]
 ```
+**Example:** Calculate the number of ways to climb a staircase with `maxSteps` at a time.
+```python
+def staircase_traversal(height, max_steps):
+    ways = [0] * (height + 1)
+    ways[0] = 1
 
-A sliding window of size 3 would look like:
-
-```javascript
-[a b c]
-  [b c d]
-    [c d e]
-      [d e f]
-        [e f g]
-          [f g h]
-```
-
-Often we'll be summing these slices - we could end up doing a lot of unnecessary work:
-
-```javascript
-[4, 6, 3], 8, 3;
-4, [6, 3, 8], 3;
-```
-
-For the second slice, rather than sum every value, we can take the last slice value, subtract the `4` and add the `3`. See [this](https://stackoverflow.com/a/64111403/3245482) answer on StackOverflow for a visual representation.
-
-### Example
-
-Given the height of a staircase and the max number of steps you can take at any one time, calculate the number of ways you can climb a staircase.
-
-```javascript
-height = 4;
-maxSteps = 2;
-output = 5;
-// 1, 1, 1, 1
-// 1, 1, 2
-// 1, 2, 1
-// 2, 1, 1
-// 2, 2
-```
-
-```kotlin
-fun staircaseTraversal(height: Int, maxSteps: Int): Int {
-	var currentNumberOfWays = 0
-	val waysToTop = mutableListOf(1)
-
-	// height + 1 because we must account for 0th step, which can be traversed
-	// in exactly 1 step
-	for (currentHeight in 1 until height + 1) {
-		// Window size is maxSteps
-		val startOfWindow = currentHeight - maxSteps - 1
-		val endOfWindow = currentHeight - 1
-		// Remove the value from the start of the window
-		if (startOfWindow >= 0) currentNumberOfWays -= waysToTop[startOfWindow]
-		// Add the value at the end of the window
-		currentNumberOfWays += waysToTop[endOfWindow]
-
-		waysToTop.add(currentNumberOfWays)
-	}
-
-	return waysToTop[height]
-}
+    for i in range(1, height + 1):
+        for j in range(1, max_steps + 1):
+            if i - j >= 0:
+                ways[i] += ways[i - j]
+    return ways[height]
 ```
